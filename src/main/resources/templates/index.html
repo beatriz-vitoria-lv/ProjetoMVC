@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Acadêmico</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="page-shell">
+    <header class="topbar">
+        <h1>Sistema Acadêmico</h1>
+        <p>Gerencie alunos, cursos e matrículas em um só lugar.</p>
+    </header>
+
+    <section class="menu-grid">
+        <a class="menu-card" href="/alunos">
+            <h3>Alunos</h3>
+            <p>Cadastre, consulte, edite e remova alunos.</p>
+        </a>
+
+        <a class="menu-card" href="/cursos">
+            <h3>Cursos</h3>
+            <p>Organize os cursos e suas informações.</p>
+        </a>
+
+        <a class="menu-card" href="/matriculas">
+            <h3>Matrículas</h3>
+            <p>Consulte e registre as matrículas dos alunos.</p>
+        </a>
+
+        <a class="menu-card" href="/h2-console" target="_blank">
+            <h3>Banco de dados</h3>
+            <p>Acesse o console H2 para consultar os dados.</p>
+        </a>
+    </section>
+
+    <p class="footer-note">Sistema desenvolvido por Beatriz Vitória Lourenço Vitoriano.</p>
+</div>
+</body>
+</html>

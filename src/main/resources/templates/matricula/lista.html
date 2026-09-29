@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Matrículas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="page-shell">
+    <section class="content-card">
+        <div class="section-header">
+            <div>
+                <span class="eyebrow">Gestão acadêmica</span>
+                <h2 class="page-title">Matrículas</h2>
+                <p class="page-subtitle">Consulte, edite e acompanhe as matrículas cadastradas.</p>
+            </div>
+            <div class="actions actions-tight">
+                <a th:href="@{/matriculas/novo}" class="btn btn-primary">+ Nova matrícula</a>
+                <a th:href="@{/}" class="btn btn-secondary">Voltar</a>
+            </div>
+        </div>
+
+        <div th:if="${sucesso}" class="alert alert-success" th:text="${sucesso}"></div>
+        <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Aluno</th>
+                    <th>Curso</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="registroMatricula : ${matriculas}">
+                    <td th:text="${registroMatricula.id}"></td>
+                    <td th:text="${registroMatricula.aluno.nome}"></td>
+                    <td th:text="${registroMatricula.curso.nome}"></td>
+                    <td th:text="${registroMatricula.dataMatricula}"></td>
+                    <td>
+                        <span class="status-badge"
+                              th:classappend="${registroMatricula.status.name() == 'ATIVA' ? ' status-ativa' : (registroMatricula.status.name() == 'TRANCADA' ? ' status-trancada' : ' status-concluida')}"
+                              th:text="${registroMatricula.status}"></span>
+                    </td>
+                    <td>
+                        <div class="table-actions">
+                            <a th:href="@{/matriculas/editar/{id}(id=${registroMatricula.id})}"
+                               class="btn btn-sm btn-outline-primary">Editar</a>
+                            <form th:action="@{/matriculas/excluir/{id}(id=${registroMatricula.id})}" method="post">
+                                <button type="submit" class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('Deseja realmente excluir esta matrícula?');">Excluir</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(matriculas)}">
+                    <td colspan="6" class="empty-state">Nenhuma matrícula cadastrada.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>
